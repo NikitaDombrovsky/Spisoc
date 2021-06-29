@@ -12,17 +12,22 @@ import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BoxAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<Product> objects;
+    int[] mSolutionArray = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+            13, 14 };
 
     BoxAdapter(Context context, ArrayList<Product> products) {
         ctx = context;
         objects = products;
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        shuffleArray(mSolutionArray);
     }
 
     // кол-во элементов
@@ -94,4 +99,19 @@ public class BoxAdapter extends BaseAdapter {
             getProduct((Integer) buttonView.getTag()).box = isChecked;
         }
     };
+    static void shuffleArray(int[] ar) {
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
+    }
+
+    // создадим массив и перемешаем его
+
+
+
 }
